@@ -18,7 +18,7 @@
         </span>
       </el-form-item>
       <el-form-item prop="code">
-        <span class="svg-container el-icon-chat-square" />
+        <span class="svg-container"><svg-icon icon-class="yanzhengma" /></span>
         <el-input v-model="loginForm.code" placeholder="请输入验证码" />
         <span class="svg-container show-pwd" @click="random">
           <img :src="photoSrc" alt="">

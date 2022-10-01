@@ -6,7 +6,7 @@
         :default-active="activeMenu"
         :collapse="isCollapse"
         :background-color="variables.menuBg"
-        :text-color="variables.menuText"
+        text-color="#000"
         :unique-opened="false"
         :active-text-color="variables.menuActiveText"
         :collapse-transition="false"
@@ -14,7 +14,11 @@
       >
         <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" />
       </el-menu>
+
+      <!--  -->
+
     </el-scrollbar>
+
   </div>
 </template>
 
@@ -51,11 +55,16 @@ export default {
     isCollapse() {
       return !this.sidebar.opened
     }
+
   }
+
 }
 </script>
 <style lang="scss" scoped>
   .aaa {
     margin-bottom: 15px;
+  }
+  .el-menu-item{
+    background-color: #fff;
   }
 </style>
