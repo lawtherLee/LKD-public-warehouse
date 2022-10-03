@@ -1,11 +1,9 @@
 <template>
-  <div>点位管理</div>
+  <div>点位管理(zxy)</div>
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>
 
 <style>

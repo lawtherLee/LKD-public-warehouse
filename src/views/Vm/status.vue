@@ -1,11 +1,9 @@
 <template>
-  <div>设备状态</div>
+  <div>设备状态(ll)</div>
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>
 
 <style>

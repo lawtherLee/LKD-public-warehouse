@@ -1,11 +1,9 @@
 <template>
-  <div>商品管理</div>
+  <div>商品管理(zxy)</div>
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>
 
 <style>
