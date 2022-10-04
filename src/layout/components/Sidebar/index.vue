@@ -3,16 +3,16 @@
     <logo v-if="showLogo" :collapse="isCollapse" class="aaa" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
-        :default-active="activeMenu"
-        :collapse="isCollapse"
-        :background-color="variables.menuBg"
-        text-color="#000"
-        :unique-opened="false"
         :active-text-color="variables.menuActiveText"
+        :background-color="variables.menuBg"
+        :collapse="isCollapse"
         :collapse-transition="false"
+        :default-active="activeMenu"
+        :unique-opened="false"
         mode="vertical"
+        text-color="#000"
       >
-        <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" />
+        <sidebar-item v-for="route in routes" :key="route.path" :base-path="route.path" :item="route" />
       </el-menu>
 
       <!--  -->
@@ -60,11 +60,22 @@ export default {
 
 }
 </script>
-<style lang="scss" scoped>
-  .aaa {
-    margin-bottom: 15px;
+<style lang="scss">
+.aaa {
+  margin-bottom: 15px;
+}
+
+.el-menu-item {
+  background-color: #fff;
+}
+
+.scrollbar-wrapper {
+  width: 189px !important;
+
+  el-menu {
+    width: 100%;
   }
-  .el-menu-item{
-    background-color: #fff;
-  }
+
+}
+
 </style>
