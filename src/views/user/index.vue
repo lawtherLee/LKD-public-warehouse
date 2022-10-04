@@ -182,11 +182,9 @@ export default {
 
           & tr {
             background-color: inherit !important;
-
           }
         }
       }
-
     }
   }
 }

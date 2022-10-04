@@ -70,12 +70,7 @@ export default {
 }
 
 .scrollbar-wrapper {
-  width: 189px !important;
-
-  el-menu {
-    width: 100%;
-  }
-
+  width: 180px !important;
 }
 
 </style>
