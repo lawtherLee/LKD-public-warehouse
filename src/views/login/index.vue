@@ -1,9 +1,9 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" class="login-form" label-position="left" :rules="rules" :model="loginForm">
+    <el-form ref="loginForm" :model="loginForm" :rules="rules" class="login-form" label-position="left">
       <div class="title-container">
         <h3 class="title">
-          <img src="@/assets/common/logo.png" alt="">
+          <img alt="" src="@/assets/common/logo.png">
         </h3>
       </div>
       <el-form-item prop="loginName">
@@ -24,13 +24,14 @@
           <img :src="photoSrc" alt="">
         </span>
       </el-form-item>
-      <el-button class="loginBtn" :loading="loading" @click="login">登录</el-button>
+      <el-button :loading="loading" class="loginBtn" @click="login">登录</el-button>
 
     </el-form>
   </div>
 </template>
 <script>
-import { VerificationCodeAPI } from '@/api/login'
+import { VerificationCodeAPI } from '@/api'
+
 export default {
   name: 'Login',
   data() {
@@ -51,7 +52,7 @@ export default {
         ],
         password: [
           { required: true, message: '输入密码', trigger: 'blur' },
-          {	min: 4, max: 16, message: '密码格式错误 ', trigger: 'blur' }
+          { min: 4, max: 16, message: '密码格式错误 ', trigger: 'blur' }
         ],
         code: [
           { required: true, message: '输入验证码', trigger: 'blur' },
@@ -86,9 +87,9 @@ export default {
     // 登录按钮
     async login() {
       try {
-        this.$refs.loginForm.validate()
+        await this.$refs.loginForm.validate()
         this.loading = true
-        await this.$store.dispatch('user/loginAction', this.loginForm)
+        await this.$store.dispatch('user/login', this.loginForm)
         this.$router.push('/')
       } catch (error) {
         console.log(error)
@@ -104,8 +105,8 @@ export default {
 /* 修复input 背景不协调 和光标变色 */
 /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
 
-$bg:#283443;
-$light_gray:#999;
+$bg: #283443;
+$light_gray: #999;
 $cursor: #999;
 
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
@@ -122,6 +123,7 @@ $cursor: #999;
     display: inline-block;
     height: 47px;
     width: 85%;
+
     input {
       background: transparent;
       border: 0px;
@@ -146,13 +148,16 @@ $cursor: #999;
     color: #454545;
     background: rgba(255, 255, 255, 0.7); // 输入登录表单的背景色
   }
+
   .el-form-item__error {
     color: #f56c6c
   }
-  .el-form-item__content{
+
+  .el-form-item__content {
     font-size: 17px;
-    padding-right:5px;
+    padding-right: 5px;
   }
+
   .loginBtn {
     background: #6377ec;
     height: 52px;
@@ -168,13 +173,14 @@ $cursor: #999;
 </style>
 
 <style lang="scss" scoped>
-$bg:#2d3a4b;
-$dark_gray:#889aa4;
-$light_gray:#68b0fe;
+$bg: #2d3a4b;
+$dark_gray: #889aa4;
+$light_gray: #68b0fe;
 .login-container {
   min-height: 100%;
   width: 100%;
   background-color: $bg;
+
   .login-form {
     position: absolute;
     top: 50%;
@@ -205,13 +211,14 @@ $light_gray:#68b0fe;
       margin: 0px auto 40px auto;
       text-align: center;
       font-weight: bold;
+
       img {
         position: absolute;
-    width: 96px;
-    height: 96px;
-    top: -117px;
-    left: 50%;
-    margin-left: -48px;
+        width: 96px;
+        height: 96px;
+        top: -117px;
+        left: 50%;
+        margin-left: -48px;
       }
     }
   }

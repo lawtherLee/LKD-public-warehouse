@@ -4,8 +4,8 @@
       <el-dropdown class="avatar-container" mode="horizontal" trigger="hover">
         <div class="avatar-wrapper">
           <img
-            src="~@/assets/common/user.png"
             class="user-avatar"
+            src="~@/assets/common/user.png"
           >
           <div>欢迎您, admin</div>
           <span>退出</span>
@@ -21,6 +21,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+
 export default {
   computed: {
     ...mapGetters([
@@ -33,7 +34,6 @@ export default {
       this.$store.dispatch('app/toggleSideBar')
     },
     async logout() {
-      console.log(111)
       await this.$store.dispatch('user/logout')
       this.$router.push(`/login`)
     }
@@ -42,38 +42,42 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.cccc{
+.cccc {
   background-color: #333;
   width: 80px;
   height: 30px;
   text-align: center;
   line-height: 5px;
+
   span {
     color: #fff;
     font-size: 12px;
   }
 }
+
 ::v-deep.el-popper[x-placement^=bottom] .popper__arrow:after {
-    top: 1px;
-    margin-left: 18px;
-    border-top-width: 0;
-    border-bottom-color: #333 !important;
+  top: 1px;
+  margin-left: 18px;
+  border-top-width: 0;
+  border-bottom-color: #333 !important;
 }
+
 .navbar {
   width: 100%;
   height: 60px;
   position: fixed;
   top: 0;
   left: 0;
-  background:url('~@/assets/common/backgroundone.png');
-  box-shadow: 0 1px 4px rgba(0,21,41,.08);
+  background: url('~@/assets/common/backgroundone.png');
+  box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+
   .hamburger-container {
     line-height: 56px;
     height: 100%;
     float: left;
     cursor: pointer;
     transition: background .3s;
-    -webkit-tap-highlight-color:transparent;
+    -webkit-tap-highlight-color: transparent;
 
     &:hover {
       background: rgba(0, 0, 0, .025)
@@ -103,7 +107,8 @@ export default {
         display: flex;
         align-items: center;
         color: #fff;
-        div{
+
+        div {
           margin-right: 15px;
         }
 
