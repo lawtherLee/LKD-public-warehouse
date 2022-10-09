@@ -25,7 +25,6 @@ export function getNodeListAPI(params) {
 }
 
 /**
-<<<<<<< HEAD
  * 获取合作商列表
  * @param {*} params 当前页码，每页数据个数，区域名称
  * @returns
@@ -72,13 +71,16 @@ export function emitPartnerAPI(data) {
     url: `/user-service/partner/${data.id}`,
     method: 'PUT',
     data
-=======
- * 商圈列表
+
+  })
+}
+// =======
+/* 商圈列表
  * @returns
  */
 export function getBusinessListAPI() {
   return request({
     url: '/vm-service/businessType'
->>>>>>> point/node
+    // >>>>>>> point/node
   })
 }
