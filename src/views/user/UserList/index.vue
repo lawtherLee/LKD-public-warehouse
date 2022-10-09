@@ -13,6 +13,65 @@
       @changePage="changePage"
       @delBtn="delBtn"
     />
+
+    <el-dialog
+      :before-close="handleClose"
+      :title="`${addRoleForm.id ? '编辑' : '新增'}人员`"
+      :visible.sync="formDialog"
+    >
+      <el-form ref="rolesForm" :model="addRoleForm" :rules="rules" label-width="120px">
+        <el-form-item label="人员名称" prop="userName">
+          <el-input
+            v-model="addRoleForm.userName"
+            maxlength="5"
+            placeholder="请输入"
+            show-word-limit
+            style="width: 80%"
+          />
+        </el-form-item>
+        <el-form-item label="角色" prop="roleId">
+          <el-select v-model="addRoleForm.roleId" placeholder="请选择" style="width: 80%">
+            <el-option v-for="item in rolesName" :key="item.roleId" :label="item.roleName" :value="item.roleId" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="联系电话" prop="mobile">
+          <el-input v-model="addRoleForm.mobile" placeholder="请输入" style="width: 80%" />
+        </el-form-item>
+        <el-form-item label="负责区域" prop="regionName">
+          <el-select v-model="addRoleForm.regionName" placeholder="请选择" style="width: 80%">
+            <el-option
+              v-for="item in areaList"
+              :key="item.id"
+              :label="item.name"
+              :value="item.name"
+              @click.native="addRoleForm.regionId=item.id"
+            />
+          </el-select>
+        </el-form-item>
+
+        <el-form-item label="头像" prop="image">
+          <input v-model="addRoleForm.image" style="display: none" type="text">
+          <el-upload
+            :class="`${fileList.length === 1 ? 'hideCard' : ''}`"
+            :file-list="fileList"
+            :http-request="upload"
+            :limit="limit"
+            :on-change="onChange"
+            :on-remove="onRemove"
+            action="#"
+            list-type="picture-card"
+          >
+            <i v-if="addRoleForm.image === ''" class="el-icon-upload" />
+            <img v-else :src="addRoleForm.image" alt="" style="width: 100%">
+          </el-upload>
+          <span style="color: #ccc">支持扩展名:jpg、png，文件不得大于100kb</span>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="info" @click="handleClose">取消</el-button>
+          <el-button type="warning" @click="addRoles">取消</el-button>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 
@@ -55,7 +114,35 @@ export default {
       limit: 1,
       userName: '',
       id: '',
-      formDialog: false
+      formDialog: false,
+      addRoleForm: {
+        userName: '',
+        roleId: '',
+        mobile: '',
+        regionName: '',
+        image: '',
+        status: '',
+        regionId: ''
+      },
+      rules: {
+        name: [{
+          required: true, message: '请输入', trigger: 'blur'
+        }],
+        rules: [{
+          required: true, message: '选择', trigger: 'blur'
+        }],
+        mobile: [
+          { required: true, message: '请输入', trigger: 'blur' },
+          { pattern: /^1[3-9]\d{9}$/, trigger: 'blur' }
+        ],
+        areas: [{
+          required: true, trigger: 'blur'
+        }],
+        photo: [{
+          required: true, message: '请上传', trigger: 'blur'
+        }]
+      },
+      fileList: []
     }
   },
   created() {
@@ -84,6 +171,20 @@ export default {
     },
     // 修改人员信息
     buttonOne() {
+    },
+    // 关闭弹窗
+    handleClose() {
+
+    },
+    // 上传图片
+    upload() {
+    },
+    onChange() {
+    },
+    onRemove() {
+    },
+    // 新建
+    addRoles() {
     }
   }
 
