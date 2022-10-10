@@ -68,7 +68,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="info" @click="handleClose">取消</el-button>
-          <el-button type="warning" @click="addRoles">取消</el-button>
+          <el-button type="warning" @click="addRoles">确认</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -78,7 +78,7 @@
 <script>
 import InputSearchTwo from '@/components/InputSearchTwo'
 import FormList from '@/components/FormList'
-import { PersonnelListAPI } from '@/api'
+import { addUserAPI, deleteUserAPI, editUserAPI, getAreasAPI, getRoleAPI, PersonnelListAPI } from '@/api'
 
 export default {
   name: 'UserList',
@@ -147,6 +147,8 @@ export default {
   },
   created() {
     this.PersonnelList()
+    this.getAreas()
+    this.getRole()
   },
   methods: {
     async PersonnelList() {
@@ -166,15 +168,33 @@ export default {
       this.PersonnelList()
     },
     // 删除人员
-    delBtn() {
-
+    async delBtn(val) {
+      try {
+        await this.$confirm('确认删除？', '提示', { type: 'warning' })
+        this.id = val
+        await deleteUserAPI(this.id.id)
+        await this.PersonnelList()
+        this.$message.success('删除成功')
+      } catch (e) {
+        console.log(e)
+      }
     },
     // 修改人员信息
     buttonOne() {
     },
     // 关闭弹窗
     handleClose() {
-
+      this.formDialog = false
+      this.addRoleForm = {
+        userName: '',
+        roleId: '',
+        mobile: '',
+        regionName: '',
+        image: '',
+        status: '',
+        regionId: ''
+      }
+      this.fileList = []
     },
     // 上传图片
     upload() {
@@ -184,7 +204,30 @@ export default {
     onRemove() {
     },
     // 新建
-    addRoles() {
+    async addRoles() {
+      try {
+        await this.$refs.rolesForm.validate()
+        this.addRoleForm.id ? await editUserAPI(this.addRoleForm) : await addUserAPI(this.addRoleForm)
+        await this.PersonnelList()
+        this.$message.success(`${this.addRoleForm.id ? '修改' : '添加'}成功`)
+        this.handleClose()
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    // 获取下拉框角色
+    async getRole() {
+      const { data } = await getRoleAPI()
+      this.rolesName = data
+    },
+    // 获取区域列表
+    async getAreas() {
+      const res = await getAreasAPI({
+        pageSize: this.areaPagesize,
+        pageIndex: this.areaPageIndex
+      })
+      console.log('res', res)
+      this.areaList = res.data.currentPageRecords
     }
   }
 
