@@ -10,7 +10,7 @@ const service = axios.create({
   timeout: 5000 // request timeout
 })
 
-const timeOut = 7200
+const timeOut = 72000
 
 const isCheckTimeOut = () => {
   return (Date.now() - store.getters.likedTime) / 1000 > timeOut

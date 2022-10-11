@@ -95,3 +95,40 @@ export const upDatePhotoAPI = data => {
   })
 }
 
+/**
+ * 获取当时工单汇总信息(人员统计头部信息)
+ * @param start 开始时间
+ * @param end 结束时间
+ * @returns {*}
+ */
+export const taskReportInfoAPI = (start, end) => {
+  return request({
+    url: `task-service/task/taskReportInfo/${start}/${end}`
+  })
+}
+/**
+ * 工单状态统计
+ * @param start 开始日期
+ * @param end 结束日期
+ * @returns {*}
+ */
+export const collectReportAPI = (start, end) => {
+  return request({
+    url: `task-service/task/collectReport/${start}/${end}`
+  })
+}
+
+/**
+ * 人员排名
+ * @param start
+ * @param end
+ * @param isRepair 是否是运维工单
+ * @param regionId 区域Id(如果是全部区域，请传0）
+ * @returns {*}
+ */
+export const getUserWorkTopAPI = (start, end, isRepair, regionId) => {
+  return request({
+    url: `task-service/task/userWorkTop10/${start}/${end}/${isRepair}/${regionId}`
+  })
+}
+

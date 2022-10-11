@@ -124,6 +124,8 @@
   </div>
 </template>
 <script>
+import { collectReportAPI, getAreasAPI, getUserWorkTopAPI, taskReportInfoAPI } from '@/api'
+
 export default {
   name: 'Index',
   data() {
@@ -147,7 +149,55 @@ export default {
       isRepair: '',
       regionId: 0
     }
+  },
+
+  mounted() {
+    this.taskReportInfo()
+    this.getAreas()
+  },
+
+  methods: {
+    // 获取运营人员和运维人员数据
+    async taskReportInfo() {
+      const res = await taskReportInfoAPI(this.start, this.end)
+      this.reportInfoList = res.data[0]
+      this.reportInfoLists = res.data[1]
+    },
+    // 获取周年月日信息
+    async moonthBtn(e) {
+      if (e.target.tagName === 'INPUT') return
+      this.time = [this.collectStart, this.collectEnd]
+      await collectReportAPI(this.collectStart, this.collectEnd)
+    },
+    async weekBtn(e) {
+      if (e.target.tagName === 'INPUT') return
+      this.time = [this.collectStart1, this.collectEnd]
+      await collectReportAPI(this.collectStart1, this.collectEnd)
+    },
+    async yearBtn(e) {
+      if (e.target.tagName === 'INPUT') return
+      this.time = [this.collectStart2, this.collectEnd]
+      await collectReportAPI(this.collectStart2, this.collectEnd)
+    },
+    // 人效排名
+    async getAreas() {
+      const { data } = await getAreasAPI({ pageIndex: this.pageIndex, pageSize: this.pageSize })
+      this.areaList = data.currentPageRecords
+    },
+    // 运营人员
+    async operatingUser(e) {
+      if (e.target.tagName === 'INPUT') return
+      if (this.val) this.regionId = this.value
+      await getUserWorkTopAPI(this.collectStart, this.collectEnd, true, this.regionId)
+    },
+    // 运维人员
+    async operationsUser(e) {
+      if (e.target.tagName === 'INPUT') return
+      if (this.val) this.regionId = this.value
+      await getUserWorkTopAPI(this.collectStart, this.collectEnd, false, this.regionId)
+    }
   }
+
 }
 </script>
 
