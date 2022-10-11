@@ -132,3 +132,26 @@ export const getUserWorkTopAPI = (start, end, isRepair, regionId) => {
   })
 }
 
+/**
+ * 人员工作量列表
+ * @param params
+ * @returns {*}
+ */
+export const getWorkloadListAPI = (params) => {
+  return request({
+    url: 'user-service/user/searchUserWork',
+    params
+  })
+}
+/**
+ * 获取用户工作量
+ * @param params
+ * @returns {*}
+ */
+export const getUserWorksAPI = (params) => {
+  return request({
+    url: 'task-service/task/userWork',
+    params
+  })
+}
+
