@@ -23,7 +23,7 @@ export default {
       path: '/vm/type',
       name: 'type',
       component: () => import('@/views/Vm/type'),
-      meta: { title: '设备类型管理管理' }
+      meta: { title: '设备类型' }
 
     }
   ]

@@ -5,6 +5,7 @@
 @import './sidebar.scss';
 @import './common.scss';
 body {
+  background-color: #f8fafd;
   height: 100%;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -13,7 +14,8 @@ body {
 }
 
 label {
-  font-weight: 700;
+  font-weight: 400;
+ 
 }
 
 html {

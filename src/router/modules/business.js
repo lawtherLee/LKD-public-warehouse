@@ -14,7 +14,7 @@ export default {
     },
     {
       path: '/task/operation',
-      name: 'business',
+      name: 'operation',
       component: () => import('@/views/task/Operator'),
       meta: { title: '运维工单' }
 
