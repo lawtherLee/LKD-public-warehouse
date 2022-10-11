@@ -78,7 +78,7 @@
 <script>
 import InputSearchTwo from '@/components/InputSearchTwo'
 import FormList from '@/components/FormList'
-import { addUserAPI, deleteUserAPI, editUserAPI, getAreasAPI, getRoleAPI, PersonnelListAPI } from '@/api'
+import { addUserAPI, deleteUserAPI, editUserAPI, getAreasAPI, getRoleAPI, PersonnelListAPI, upDatePhotoAPI } from '@/api'
 
 export default {
   name: 'UserList',
@@ -180,7 +180,9 @@ export default {
       }
     },
     // 修改人员信息
-    buttonOne() {
+    buttonOne(val) {
+      this.formDialog = true
+      this.addRoleForm = { ...val }
     },
     // 关闭弹窗
     handleClose() {
@@ -197,11 +199,19 @@ export default {
       this.fileList = []
     },
     // 上传图片
-    upload() {
+    async upload(data) {
+      try {
+        this.addRoleForm.image = await upDatePhotoAPI(data.file)
+        return true
+      } catch (e) {
+        return false
+      }
     },
-    onChange() {
+    onChange(file, fileList) {
+      this.fileList = fileList
     },
-    onRemove() {
+    onRemove(file, fileList) {
+      this.fileList = fileList
     },
     // 新建
     async addRoles() {
@@ -226,103 +236,12 @@ export default {
         pageSize: this.areaPagesize,
         pageIndex: this.areaPageIndex
       })
-      console.log('res', res)
       this.areaList = res.data.currentPageRecords
     }
   }
 
 }
 </script>
-<!--<style lang="scss">
-.app-main {
-  width: 89.5% !important;
-  min-height: calc(100vh - 20px) !important;
-  padding-top: 60px !important;
-  margin-right: 0;
-  margin-left: 182px !important;
-  background-color: #f4f6fa;
-
-  .main {
-    padding: 20px;
-
-    .search {
-      margin-bottom: 20px;
-      padding: 14px;
-      width: 100%;
-      height: 64px;
-      background-color: #fff;
-      border-radius: 6px;
-
-      .search_the_title {
-        font-size: 14px;
-        color: #666666;
-      }
-
-      .el-input__inner {
-        height: 36px;
-      }
-
-      .search_button {
-        border-radius: 4px;
-        width: 80px;
-        height: 36px;
-        line-height: 12px;
-        background-color: #6783f7;
-
-        el-button {
-          height: 100%;
-        }
-
-        .el-button&#45;&#45;primary {
-          border: 0;
-        }
-      }
-    }
-
-    .list {
-      padding: 20px 15px 19px 17px;
-      width: 100%;
-      background-color: #fff;
-      border-radius: 6px;
-      //新增按钮
-      .the_new_button {
-        width: 80px;
-        height: 36px;
-        border: 0;
-        color: white;
-        background: linear-gradient(135deg, #ff9743, #ff5e20);
-        padding: 0;
-        margin-bottom: 20px;
-
-        .el-icon-circle-plus-outline {
-          font-size: 18px;
-          vertical-align: -8%;
-        }
-      }
-
-      .el-table {
-        .el-table__header-wrapper {
-          border-radius: 6px !important;
-        }
-
-        thead {
-          color: #fff;
-          font-weight: 500;
-          background: linear-gradient(to right, #6fa3fe, #4cdafe) !important;
-
-          & th {
-            background-color: inherit !important;
-          }
-
-          & tr {
-            background-color: inherit !important;
-          }
-        }
-      }
-    }
-  }
-}
-</style>-->
 <!--        :header-row-style="{background:'#eef1f6',color:'#606266',borderRadius:'4px'}"-->
 <style lang="scss">
 .el-dialog {

@@ -80,3 +80,18 @@ export const getAreasAPI = params => {
     params
   })
 }
+/**
+ * 上传图片
+ * @param data
+ * @returns {*}
+ */
+export const upDatePhotoAPI = data => {
+  const formdata = new FormData()
+  formdata.append('filename', data)
+  return request({
+    url: 'vm-service/sku/fileUpload',
+    method: 'POST',
+    data: formdata
+  })
+}
+
