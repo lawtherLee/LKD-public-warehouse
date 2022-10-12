@@ -242,6 +242,7 @@ export default {
         this.$message.success('修改点位成功')
         this.$parent.deviceList()
         this.closePropup()
+        console.log(11)
       } catch (error) {
         this.$message.error(error.response.data)
       }

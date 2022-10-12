@@ -165,6 +165,7 @@ export default {
         isImageKB ? this.formData.image = data : this.$message.error('图片大于100kb')
       } catch (error) {
         console.log(error)
+        console.log(11)
       }
     },
     // 添加机器类型
