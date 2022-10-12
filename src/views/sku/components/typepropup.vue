@@ -138,6 +138,7 @@ export default {
     async getGoodsList() {
       const { data } = await getGoodsListAPI(this.page)
       console.log(11111, data)
+      console.log(data)
       this.goodsList = data.currentPageRecords
     },
     // 确定提交按钮
