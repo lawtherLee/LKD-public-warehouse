@@ -1,11 +1,9 @@
 <template>
-  <div>区域</div>
+  <div>区域(zxy)</div>
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>
 
 <style>

@@ -1,11 +1,9 @@
 <template>
-  <div>策略管理</div>
+  <div>策略管理(csw)</div>
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>
 
 <style>

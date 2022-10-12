@@ -1,11 +1,9 @@
 <template>
-  <div>合作商管理</div>
+  <div>合作商管理(zxy)</div>
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>
 
 <style>

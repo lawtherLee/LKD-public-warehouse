@@ -3,8 +3,9 @@
 @import './transition.scss';
 @import './element-ui.scss';
 @import './sidebar.scss';
-@import './common.scss';
+
 body {
+  background-color: #f8fafd;
   height: 100%;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -62,4 +63,27 @@ div:focus {
 // main-container global css
 .app-container {
   padding: 20px;
+}
+
+
+.left {
+  font-size: 14px;
+  background: linear-gradient(135deg, #ff9743, #ff5e20);
+  color: #fff !important;
+  border: none;
+
+  &:hover {
+    background: linear-gradient(135deg, #e96b03, #e64202);
+  }
+}
+
+.right {
+  font-size: 14px;
+  background-color: #fbf4f0;
+  color: #655b56 !important;
+  border: none;
+
+  &:hover {
+    background-color: #ece4df;
+  }
 }

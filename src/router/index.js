@@ -1,17 +1,22 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import business from './modules/business.js'
-import nodes from './modules/nodes'
-import facility from './modules/facility'
-import user from './modules/user'
-import sku from './modules/sku'
-import policy from './modules/policy'
-import order from './modules/order'
-import report from './modules/report'
+// import business from './modules/business.js'
+// import nodes from './modules/nodes'
+// import facility from './modules/facility'
+// import user from './modules/user'
+// import sku from './modules/sku'
+// import policy from './modules/policy'
+// import order from './modules/order'
+// import report from './modules/report'
+
 Vue.use(Router)
-const asyncRoutes = [business, nodes, facility, user, sku, policy, order, report]
+// const asyncRoutes = [business, nodes, facility, user, sku, policy, order, report]
 /* Layout */
 import Layout from '@/layout'
+
+// 一次性导入动态路由
+const res = require.context('@/router/modules', false, /\.js$/)
+const asyncRouters = res.keys().map(ele => res(ele).default)
 
 export const constantRoutes = [
   {
@@ -46,7 +51,7 @@ const createRouter = () => new Router({
   // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
   // routes: constantRoutes
-  routes: [...constantRoutes, ...asyncRoutes]
+  routes: [...constantRoutes, ...asyncRouters]
 })
 
 const router = createRouter()
