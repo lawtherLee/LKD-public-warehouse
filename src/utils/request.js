@@ -1,51 +1,38 @@
-// 实现对axios
+// 实现对axios封装
 import axios from 'axios'
 
+import store from '@/store'
+// import { Message } from 'element-ui'
 // 通过axios创建axios实例
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // 基准地址
-  timeout: 5000 // request timeout
+  timeout: 5000
 })
-
-service.interceptors.request.use()
 // 请求拦截器
-service.interceptors.request.use((config) => {
-  const token = store.getters.token
-  if (token) {
-    // if (isCheckTimeOut()) {
-    //   store.dispatch('user/logout')
-    //   router.push('/login')
-    //   return Promise.reject(new Error('token过期'))
-    // }
-    config.headers.Authorization = `${token}`
+service.interceptors.request.use(
+  config => {
+    // 请求头
+    if (store.getters.token) {
+      config.headers.Authorization = `${store.getters.token}`
+    }
+    return config
   }
-  return config
-}, (error) => {
-  return Promise.reject(error)
-})
-
+)
 // 响应拦截器
-// service.interceptors.response.use((response) => {
-//   // console.log(response)
+// service.interceptors.response.use(response => {
+//   const { data } = response
+//   if (data.size) {
+//     return data
+//   }
 //   if (response.data.success) {
-//     const { msg, success } = response.data
-//     if (success) {
-//       return response.data
-//     } else {
-//       Message.error(msg)
-//       return Promise.reject(new Error(msg))
-//     }
-//   } else {
-//     return response.data
+//     // 业务逻辑成功时
+//     return data
 //   }
-// }, (error) => {
-//   if (error.response && error.response.data && error.response.status === 401) {
-//     store.dispatch('user/logout')
-//     router.push('/login')
-//   } else {
-//     Message.error(error.response.data || error.message || '请求失败')
-//   }
-//   return Promise.reject(error)
+//   // 业务逻辑没有成功
+//   Message.error(data.msg)
+//   return Promise.reject(new Error(data.msg))
+// }, error => {
+//   Message.error(error.msg)
+//   return Promise.reject(new Error(error))
 // })
-
 export default service
