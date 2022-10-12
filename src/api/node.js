@@ -37,6 +37,32 @@ export function getPartnerListAPI(params) {
 }
 
 /**
+ * 新增区域
+ * @param {*} data 密码和手机号必须
+ * @returns
+ */
+export function addRegionAPI(data) {
+  return request({
+    url: '/vm-service/region',
+    method: 'POST',
+    data
+  })
+}
+
+/**
+ * 新增点位
+ * @param {*} data
+ * @returns
+ */
+export function addNodeAPI(data) {
+  return request({
+    url: '/vm-service/node',
+    method: 'POST',
+    data
+  })
+}
+
+/**
  * 新增合作商
  * @param {*} data 密码和手机号必须
  * @returns
@@ -57,6 +83,18 @@ export function addPartnerListAPI(data) {
 export function delPartnerAPI(id) {
   return request({
     url: `/user-service/partner/${id}`,
+    method: 'DELETE'
+  })
+}
+
+/**
+ * 删除区域
+ * @param {*} data 合作商Id
+ * @returns
+ */
+export function delRegionAPI(id) {
+  return request({
+    url: `/vm-service/region/${id}`,
     method: 'DELETE'
   })
 }

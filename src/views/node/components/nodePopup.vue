@@ -1,52 +1,55 @@
 <template>
   <div id="from">
-    <!-- 新增合作商弹窗 -->
+    <!-- 新增点位弹窗 -->
     <el-dialog title="新增点位" :visible="isShowAddNode" @close="addNodeClose">
       <el-form ref="addNodeForm" :model="formData" :rules="rules">
         <div class="character">
           <el-form-item label="点位名称:" label-width="130px" prop="name">
             <el-input v-model="formData.name" placeholder="请输入" maxlength="10" show-word-limit />
           </el-form-item>
-          <el-form-item label="所在区域:" label-width="130px" prop="contact">
+          <el-form-item label="所在区域:" label-width="130px" prop="regionId">
             <el-select v-model="formData.regionId" placeholder="请选择">
-              <el-option v-for="item in regionList" :key="item.id" :label="item.name" :value="item.name" />
+              <el-option v-for="item in addSelect.regionList" :key="item.id" :label="item.name" :value="item.id" />
             </el-select>
           </el-form-item>
-          <el-form-item label="所属商圈:" label-width="130px" prop="mobile">
-            <el-select v-model="formData.region" placeholder="请选择">
-              <el-option v-for="item in businessList" :key="item.id" :label="item.name" :value="item.name" />
+          <el-form-item label="所属商圈:" label-width="130px" prop="businessId">
+            <el-select v-model="formData.businessId" placeholder="请选择">
+              <el-option v-for="item in businessList" :key="item.id" :label="item.name" :value="item.id" />
             </el-select>
           </el-form-item>
-          <el-form-item label="归属合作商:" label-width="130px" prop="account">
-            <el-select v-model="formData.region" placeholder="请选择">
-              <el-option label="区域一" value="shanghai" />
+          <el-form-item label="归属合作商:" label-width="130px" prop="ownerName">
+            <el-select ref="busiRef" v-model="formData.ownerName" placeholder="请选择">
+              <el-option v-for="item in addSelect.partnerList" :key="item.id" :label="item.name" :value="item.id" />
             </el-select>
           </el-form-item>
-          <el-form-item label="详细地址:" label-width="130px" prop="password">
-            <el-select v-model="formData.region" placeholder="请选择">
-              <el-option label="区域一" value="shanghai" />
+          <el-form-item label="详细地址:" label-width="130px" prop="areaCode">
+            <el-select ref="detRef" v-model="formData.areaCode" placeholder="请选择">
+              <el-option v-for="item in addSelect.regionList" :key="item.id" :label="item.name" :value="item.id" />
             </el-select>
+          </el-form-item>
+          <el-form-item label="备注说明:" label-width="130px" prop="addr">
+            <el-input v-model="formData.addr" placeholder="请输入" maxlength="40" type="textarea" />
           </el-form-item>
         </div>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button class="cancel" @click="addNodeClose">取 消</el-button>
-        <el-button type="primary" class="exactly" @click="addPartnerList">确 定</el-button>
+        <el-button type="primary" class="exactly" @click="addNode">确 定</el-button>
       </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import { getBusinessListAPI } from '@/api'
+import { getBusinessListAPI, addNodeAPI } from '@/api'
 export default {
   props: {
     isShowAddNode: {
       type: Boolean,
       default: false
     },
-    regionList: {
-      type: Array,
+    addSelect: {
+      type: Object,
       required: true
     }
   },
@@ -55,26 +58,27 @@ export default {
       formData: {
         name: '',
         addr: '',
-        areaCode: '',
+        areaCode: 0,
         createUserId: 0,
         regionId: '',
-        businessId: 0,
-        ownerId: 0,
+        businessId: '',
+        ownerId: '',
         ownerName: ''
       },
       rules: {
         name: [{ required: true, message: '必填' }],
-        contact: [{ required: true, message: '必填' }],
-        mobile: [{ required: true, message: '必填' }],
-        ratio: [{ required: true, message: '必填' }],
-        account: [{ required: true, message: '必填' }],
-        password: [{ required: true, message: '必填' }]
+        regionId: [{ required: true, message: '必填' }],
+        businessId: [{ required: true, message: '必填' }],
+        ownerName: [{ required: true, message: '必填' }],
+        areaCode: [{ required: true, message: '必填' }],
+        addr: [{ required: true, message: '必填' }]
       },
       businessList: []
     }
   },
   mounted() {
     this.getBusinessList()
+    console.log('zhang', this.addSelect)
   },
   methods: {
     addNodeClose() {
@@ -84,7 +88,16 @@ export default {
     async getBusinessList() {
       const data = await getBusinessListAPI()
       this.businessList = data.data
+      console.log(888, this.businessList)
+    },
+    async addNode() {
+      this.formData.areaCode = this.$refs.detRef.selected.value
+      this.formData.ownerId = this.$refs.busiRef.selected.value
+      this.formData.ownerName = this.$refs.busiRef.selected.label
+      const data = await addNodeAPI(this.formData)
+      console.log(111222, data)
     }
+
   }
 }
 </script>

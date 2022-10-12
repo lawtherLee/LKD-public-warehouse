@@ -18,9 +18,9 @@
     <div class="main">
       <!-- 按钮 -->
       <el-button class="btn" type="warning" icon="el-icon-circle-plus-outline" @click="isShowAddNode=true">新建</el-button>
-      <nodePopup :is-show-add-node.sync="isShowAddNode" :region-list="regionList" />
+      <nodePopup :is-show-add-node.sync="isShowAddNode" :add-select="addSelect" />
       <!-- 表格区域 -->
-      <el-table :cell-style="tdCss" style="width: 100%" :data="nodeList">
+      <el-table :cell-style="tdCss" style="width: 100%" :data="addSelect.nodeList">
         <el-table-column type="index" label="序号" width="75" />
         <el-table-column prop="name" label="点位名称" width="220" />
         <el-table-column prop="region.name" label="所在区域" width="240" />
@@ -42,7 +42,7 @@
 
 <script>
 import nodePopup from './components/nodePopup.vue'
-import { getNodeListAPI, getRegionListAPI } from '@/api'
+import { getNodeListAPI, getRegionListAPI, getPartnerListAPI } from '@/api'
 export default {
   name: 'Region',
   components: { nodePopup },
@@ -56,29 +56,40 @@ export default {
       page: {
         // 放置页码及相关数据
         pageIndex: 1,
-        pagesize: 1000,
+        pageSize: 10,
         name: ''
       },
-      nodeList: [],
-      regionList: [],
+      addSelect: {
+        regionList: [],
+        partnerList: [],
+        nodeList: []
+      },
       isShowAddNode: false
     }
   },
   mounted() {
     this.getNodeList()
     this.getRegionList()
+    this.getPartnerList()
   },
   methods: {
+    // 点位列表
     async getNodeList() {
       const { data } = await getNodeListAPI(this.page)
-      this.nodeList = data.currentPageRecords
+      this.addSelect.nodeList = data.currentPageRecords
       console.log(111222, data)
     },
     // 区域列表
     async  getRegionList() {
       const { data } = await getRegionListAPI(this.page)
-      this.regionList = data.currentPageRecords
-      console.log(999, data.currentPageRecords)
+      this.addSelect.regionList = data.currentPageRecords
+      console.log(777, data)
+    },
+    // 合作商列表
+    async getPartnerList() {
+      const { data } = await getPartnerListAPI(this.page)
+      this.addSelect.partnerList = data.currentPageRecords
+      console.log(this.addSelect.partnerList)
     }
   }
 }
