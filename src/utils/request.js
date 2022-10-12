@@ -1,8 +1,5 @@
 // 实现对axios
 import axios from 'axios'
-import { Message } from 'element-ui'
-import router from '@/router'
-import store from '@/store'
 
 // 通过axios创建axios实例
 const service = axios.create({
@@ -10,11 +7,7 @@ const service = axios.create({
   timeout: 5000 // request timeout
 })
 
-const timeOut = 72000
-
-const isCheckTimeOut = () => {
-  return (Date.now() - store.getters.likedTime) / 1000 > timeOut
-}
+service.interceptors.request.use()
 // 请求拦截器
 service.interceptors.request.use((config) => {
   const token = store.getters.token
