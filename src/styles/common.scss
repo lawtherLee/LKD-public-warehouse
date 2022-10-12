@@ -73,6 +73,7 @@
     width: 100%;
     padding-right: 10px;
   }
+
 }
 
 .seleInfo {
@@ -82,6 +83,7 @@
 }
 
 .el-form-item {
+ 
   margin-bottom: 20px;
 }
 
@@ -117,6 +119,7 @@
 
 .seleW {
   .el-input__inner {
+
     border: 0 none;
     padding: 0;
     width: 60px;
@@ -199,8 +202,9 @@
     width: 150px;
 
     .el-input__inner {
-      height: 28px;
-      line-height: 28px;
+     
+      height: 38px;
+      line-height: 32px;
     }
   }
 }
@@ -216,14 +220,14 @@
 
 // 弹窗信息
 .el-dialog__header {
-  background: #66b1ff;
+  // background: #66b1ff;
 
   .el-icon-close:before {
-    color: #fff;
+    color: #000;
   }
 
   .el-dialog__title {
-    color: #fff;
+    // color: #fff;
   }
 
 }
@@ -317,6 +321,7 @@
     }
 
     .el-row {
+     
       overflow: hidden;
       line-height: 36px;
       margin-bottom: 10px;
@@ -331,11 +336,13 @@
 
   td {
     border: 1px solid #ccc;
+    border-bottom: 1px solid #000;
     height: 35px;
     padding: 0 8px;
   }
 
   th {
+  
     border: 1px solid #ccc;
     height: 35px;
     width: 250px;

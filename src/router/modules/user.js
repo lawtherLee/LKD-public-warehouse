@@ -1,8 +1,7 @@
 import Layout from '@/layout'
-
 export default {
-  path: '/user',
-  name: 'user',
+  path: '/dashboard23',
+  name: 'dashboard23',
   component: Layout,
   meta: { title: '人员管理', icon: 'rygl' },
   children: [

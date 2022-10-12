@@ -1,6 +1,5 @@
 // 实现对axios
 import axios from 'axios'
-import store from '@/store'
 
 // 通过axios创建axios实例
 const service = axios.create({

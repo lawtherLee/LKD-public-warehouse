@@ -13,7 +13,7 @@ const name = defaultSettings.title || 'vue Admin Template' // page title
 // For example, Mac: sudo npm run
 // You can change the port by the following methods:
 // port = 9528 npm run dev OR npm run dev --port = 9528
-const port = process.env.port || process.env.npm_config_port || 9528
+const port = process.env.port || process.env.npm_config_port || 9528 // dev port
 
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {
@@ -27,8 +27,8 @@ module.exports = {
   publicPath: '/',
   outputDir: 'dist',
   assetsDir: 'static',
-  lintOnSave: process.env.NODE_ENV === 'development', // 关闭语法检查
-  productionSourceMap: false, // 打包优化
+  lintOnSave: process.env.NODE_ENV === 'development',
+  productionSourceMap: false,
   devServer: {
     port: port,
     open: true,
@@ -37,11 +37,20 @@ module.exports = {
       errors: true
     },
     proxy: {
+      // 当我们的本地的请求 有/api的时候，就会代理我们的请求地址向另外一个服务器发出请求
       '/api': {
+
         target: 'http://likede2-admin.itheima.net/likede/', // 跨域请求的地址
         changeOrigin: true // 只有这个值为true的情况下 才表示开启跨域
+        // 路径重写
+        // pathRewrite: {
+        // // 重新路由  localhost:8888/api/login  => www.baidu.com/login
+        //   '^/api': '' // 假设我们想把 localhost:8888/api/login 变成www.baidu.com/api/login 就需要这么做
+        // }
       }
+
     }
+
     // before: require('./mock/mock-server.js')
   },
   configureWebpack: {
