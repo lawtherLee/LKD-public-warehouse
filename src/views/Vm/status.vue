@@ -206,6 +206,7 @@ export default {
         const { data } = await deviceListAPI(this.params)
         this.tableData = data
         console.log(2, data)
+        console.log(111)
       } finally {
         this.loading = false
       }
