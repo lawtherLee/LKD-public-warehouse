@@ -157,6 +157,7 @@ export default {
       } catch (error) {
         console.log(error.response)
         this.$message.error(error.response.data)
+        console.log(11)
       } finally {
         this.loading = false
       }

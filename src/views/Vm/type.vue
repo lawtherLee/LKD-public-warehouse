@@ -188,6 +188,7 @@ export default {
         const { data } = await vmTypeListApi(this.params)
         this.tableData = data
         console.log(1232, this.tableData)
+        console.log(111)
       } finally {
         this.loading = false
       }

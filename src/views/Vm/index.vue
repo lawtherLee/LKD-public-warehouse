@@ -209,6 +209,7 @@ export default {
       }
       this.isshowStrategy = true
       console.log(this.checkedTableList)
+      console.log(111)
     },
     handleSelectionChange(value) {
       if (!value.length) this.checkedTableList = []
@@ -228,6 +229,7 @@ export default {
       this.loading = true
       try {
         const { data } = await deviceListAPI(this.params)
+        console.log(111)
         this.tableData = data
       } finally {
         this.loading = false

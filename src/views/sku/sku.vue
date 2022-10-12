@@ -187,6 +187,7 @@ export default {
       }
       this.$refs.typePropup.formData = data
       this.$refs.typePropup.skuId = row.skuId
+      console.log(111)
       console.log(124, this.$refs.typePropup.formData, this.$refs.typePropup.skuId)
     },
     // 点击删除

@@ -167,6 +167,7 @@ export default {
       }
       const { data } = await getdaySalesAPI(params)
       this.dayNUm = data
+      console.log(1)
     },
 
     // 提交
