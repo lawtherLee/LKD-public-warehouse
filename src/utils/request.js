@@ -1,5 +1,6 @@
 // 实现对axios
 import axios from 'axios'
+import store from '@/store'
 
 // 通过axios创建axios实例
 const service = axios.create({
@@ -12,11 +13,11 @@ service.interceptors.request.use()
 service.interceptors.request.use((config) => {
   const token = store.getters.token
   if (token) {
-    if (isCheckTimeOut()) {
-      store.dispatch('user/logout')
-      router.push('/login')
-      return Promise.reject(new Error('token过期'))
-    }
+    // if (isCheckTimeOut()) {
+    //   store.dispatch('user/logout')
+    //   router.push('/login')
+    //   return Promise.reject(new Error('token过期'))
+    // }
     config.headers.Authorization = `${token}`
   }
   return config
