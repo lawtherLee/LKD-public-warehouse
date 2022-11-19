@@ -11,10 +11,20 @@ import '@/styles/index.scss' // global css
 import App from './App'
 import store from './store'
 import router from './router'
+import * as echarts from 'echarts'
 
 import '@/icons' // icon
 import '@/permission' // permission control
+import dayjs from 'dayjs'
+// 国际化 中文时区
+import 'dayjs/locale/zh-cn'
 
+dayjs.locale('zh-cn')
+
+Vue.prototype.dayjs = dayjs
+Vue.prototype.echarts = echarts
+import components from './components'
+Vue.use(components)
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api

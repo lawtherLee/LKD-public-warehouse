@@ -63,3 +63,26 @@ div:focus {
 .app-container {
   padding: 20px;
 }
+
+
+.left {
+  font-size: 14px;
+  background: linear-gradient(135deg, #ff9743, #ff5e20);
+  color: #fff !important;
+  border: none;
+
+  &:hover {
+    background: linear-gradient(135deg, #e96b03, #e64202);
+  }
+}
+
+.right {
+  font-size: 14px;
+  background-color: #fbf4f0;
+  color: #655b56 !important;
+  border: none;
+
+  &:hover {
+    background-color: #ece4df;
+  }
+}

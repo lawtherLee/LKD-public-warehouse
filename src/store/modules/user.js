@@ -1,35 +1,56 @@
-import { loginAPI } from '@/api/login'
-import { Message } from 'element-ui'
+import { loginAPI, userInfoAPI } from '@/api'
+import { getToken, setToken, removeToken } from '@/utils/auth'
+
 export default {
   namespaced: true,
   state: {
-    token: null
+    token: getToken(),
+    userInfo: {},
+    likedTime: '' // 时间戳
   },
   mutations: {
+    // 设置token
     setToken(state, token) {
       state.token = token
+      // 缓存
+      setToken(token)
     },
-    RMOVE_TOKEN(state) {
+
+    // 删除token
+    removeToken(state) {
+      // vuex里删除
       state.token = null
+      // cookie删除
+      removeToken()
+    },
+
+    // 获取用户信息
+    setUserInfo(state, userInfo) {
+      state.userInfo = JSON.parse(JSON.stringify(userInfo))
+    },
+    // 删除用户信息
+    removeUserInfo(state) {
+      state.userInfo = {}
+    },
+
+    // 设置时间戳
+    setLikedTime(state, time) {
+      state.likedTime = time
     }
   },
   actions: {
-    async loginAction({ commit }, loginData) {
-      const { data } = await loginAPI(loginData)
-      try {
-        if (data.token !== null) {
-          commit('setToken', data.token)
-          Message.success(data.msg)
-        } else {
-          Message.error(data.msg)
-        }
-      } catch (err) {
-        throw Error(err.message)
-      }
+    async login({ commit }, data) {
+      const res = await loginAPI(data)
+      commit('setToken', res.data.token)
+      commit('setLikedTime', Date.now())
+
+      const baseUserInfo = await userInfoAPI(res.data.userId)
+      console.log(baseUserInfo)
+      commit('setUserInfo', baseUserInfo)
     },
     logout({ commit }) {
-      // 清除用户数据  token
-      commit('RMOVE_TOKEN')
+      commit('removeToken')
+      commit('removeUserInfo')
     }
   }
 }

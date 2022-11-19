@@ -29,15 +29,18 @@
     }
 
     .scrollbar-wrapper {
+     
       overflow-x: hidden !important;
     }
 
     .el-scrollbar__bar.is-vertical {
+      display: none;
       right: 0px;
     }
 
     .el-scrollbar {
       height: 100%;
+      
     }
 
     &.has-logo {
@@ -66,10 +69,12 @@
     }
 
     .el-menu {
-   
+    
+      background-color: #fff; 
+      width: 175px;
       border: none;
       height: 100%;
-      width: 100% !important;
+      // width: 100% !important;
     }
 
     // menu hover
@@ -110,7 +115,7 @@
     }
 
     .submenu-title-noDropdown {
- ;
+
       padding: 0 !important;
       position: relative;
 
@@ -227,10 +232,12 @@
     }
 
     &::-webkit-scrollbar {
+   
       width: 6px;
     }
 
     &::-webkit-scrollbar-thumb {
+     
       background: #99a9bf;
       border-radius: 20px;
     }

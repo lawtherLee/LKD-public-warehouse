@@ -6,23 +6,23 @@ export default {
   meta: { title: '人员管理', icon: 'rygl' },
   children: [
     {
-      path: '/user/index',
-      name: 'index',
-      component: () => import('@/views/user/index'),
+      path: 'index',
+      name: 'UserList',
+      component: () => import('@/views/user/UserList'),
       meta: { title: '人员列表' }
 
     },
     {
-      path: '/user/user-task',
-      name: 'business',
-      component: () => import('@/views/user/user-task'),
+      path: 'user-task-stats',
+      name: 'user-task-stats',
+      component: () => import('@/views/user/UserTaskStats'),
       meta: { title: '人效统计' }
 
     },
     {
-      path: '/user/user-work',
-      name: 'business',
-      component: () => import('@/views/user/user-work'),
+      path: 'user-work',
+      name: 'user-work',
+      component: () => import('@/views/user/UserWork'),
       meta: { title: '工作量列表' }
 
     }
